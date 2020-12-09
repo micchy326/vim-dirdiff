@@ -522,6 +522,7 @@ function! <SID>DirDiffOpen()
         endif
 
         " Fool the window saying that this is diff
+        diffoff!
         diffthis
         call <SID>GotoDiffWindow()
         " Resize the window
@@ -532,6 +533,7 @@ function! <SID>DirDiffOpen()
 
         if exists("s:LastMode")
             if s:LastMode == 2
+                diffoff!
                 call <SID>Drop(previousFileA)
                 silent exec "edit ".s:FilenameA
                 diffthis
@@ -546,6 +548,7 @@ function! <SID>DirDiffOpen()
                 call <SID>Drop(previousFile)
                 silent exec "edit ".s:FilenameB
                 silent exec "bd ".bufnr(previousFile)
+                diffoff!
                 diffthis
 
                 " To ensure that A is on the left and B on the right, splitright must be off
